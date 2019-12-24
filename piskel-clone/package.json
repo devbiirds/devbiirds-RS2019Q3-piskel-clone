@@ -1,0 +1,34 @@
+{
+  "name": "piskel-clone",
+  "version": "1.0.0",
+  "description": "my piskel-clone task",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --inline --hot watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "devbiirds"
+  },
+  "author": "Vadim Minakov",
+  "license": "ISC",
+  "dependencies": {
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^5.0.2",
+    "html-loader": "^0.5.5",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.1.1",
+    "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.4",
+    "webpack-dev-server": "^3.10.1"
+  }
+}
