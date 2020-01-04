@@ -1,0 +1,12 @@
+.header{
+    margin:0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    &__nav{
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

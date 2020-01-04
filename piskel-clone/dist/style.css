@@ -1,4 +1,113 @@
+.header {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-between; }
+  .header__nav {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+
+.tools {
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  height: 100%; }
+  .tools__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; }
+    .tools__item--size {
+      display: flex;
+      flex-direction: column; }
+      .tools__item--size .size_info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 30px;
+        font-size: 16px;
+        padding: 6px; }
+        .tools__item--size .size_info span {
+          cursor: pointer; }
+    .tools__item--elements {
+      margin-left: 30px;
+      height: 550px;
+      width: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center; }
+    .tools__item--element {
+      border-radius: 30%;
+      padding: 10px;
+      border: 1px solid black; }
+
+.tools_section {
+  height: 97%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.tools_icon {
+  cursor: pointer;
+  width: 36px;
+  height: 36px; }
+
+.tools_icon--active {
+  border: 3px solid red; }
+
+.size_active--small {
+  display: none;
+  margin-left: 5px;
+  height: 6px;
+  width: 6px;
+  background: #000;
+  border-radius: 50%; }
+
+.size_active--medium {
+  display: none;
+  margin-left: 5px;
+  height: 6px;
+  width: 6px;
+  background: #000;
+  border-radius: 50%; }
+
+.size_active--large {
+  display: none;
+  margin-left: 5px;
+  height: 6px;
+  width: 6px;
+  background: #000;
+  border-radius: 50%; }
+
+.canvas {
+  min-width: 768px;
+  min-height: 768px;
+  border: 1px solid black; }
+
+canvas {
+  width: 768px;
+  height: 768px; }
+
+.canvas__tools {
+  width: 400px; }
+
+.canvas__pallete {
+  width: 768px;
+  height: 768px; }
+
+html {
+  height: 100%; }
+
 body {
-  background: red; }
+  height: 100%; }
+
+.mainbox {
+  width: 100%;
+  height: 100%; }
+
+.wrapper {
+  height: 100%; }
 
 /*# sourceMappingURL=style.css.map*/

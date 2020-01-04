@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Piskel-clone</title>
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/style.css">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.12.0-web/css/all.css">
+</head>
+<body>
+    <div class="mainbox">
+        <div class="wrapper">
+            <header class="header">
+                <div class="header__nav">
+                    <div class="header__nav--menu"><img src="./assets/img/menu.png" alt="nav_menu"></div>
+                    <div class="header__nav--title">Piskel-clone by devbiirds</div>
+                </div>
+                <div class="header_menu">
+                    <img src="./assets/img/menu icon.png" alt="menu">
+                </div>
+            </header>
+        
+        <section class="tools_section">
+            <div class="tools">
+                <div class="tools__item">
+                    <div class="tools__item--size">
+                        <div class="size_info size_small"><span>Small</span><div class="size_active--small"></div></div>
+                        <div class="size_info size_medium"><span> Medium</span><div class="size_active--medium"></div></div>
+                        <div class="size_info size_large"><span>Large</span><div class="size_active--large"></div></div>
+                    </div>
+                    <div class="tools__item--elements">
+                            <div class="tools__item--element pencil"><img src="./assets/img/pencil-alt-solid.svg" alt="pencil" class="tools_icon" id="pencil"></div>
+                            <div class="tools__item--element bucket"><img src="./assets/img/fill-drip-solid.svg" alt="bucket" class="tools_icon" id="bucket"></div>
+                            <div class="tools__item--element eraser"><img src="./assets/img/eraser-solid.svg" alt="eraser" class="tools_icon" id="eraser"></div>
+                            <div class="tools__item--element rectangle"><img src="./assets/img/square-regular.svg" alt="squade" class="tools_icon" id="rectangle"></div>
+                            <div class="tools__item--element rectangefull"><img src="./assets/img/square-solid.svg" alt="squade_solid" class="tools_icon" id="rectangefull"></div>
+                            <div class="tools__item--element lighten"><img src="./assets/img/adjust-solid.svg" alt="adjust" class="tools_icon" id="lighten"></div>
+                            <div class="tools__item--element pippete"><img src="./assets/img/eye-dropper-solid.svg" alt="eye-dropper" class="tools_icon" id="pippete"></div>
+                            <div class="tools__item--element allbucket"><img src="./assets/img/fill-solid.svg" alt="bucketFull" class="tools_icon" id="allbucket"></div>
+                    </div>
+                    <div class="tools__item--changecolor">
+                        <div class="tools__item--changecolor--tool"></div>
+                    </div>
+                </div>
+                <div class="tools__item frame">
+                    Тут будут фреймы
+                </div>
+            </div>
+            <div class="canvas">
+                <canvas class="canvas__pallete" height="768px" width="768px">
+
+                </canvas>
+            </div>
+            <div class="canvas__tools">
+                <div class="canvas__tools--show-canvas">
+
+                </div>
+                <div class="canvas__tools--layers">
+
+                </div>
+                <div class="canvas__tools--export">
+
+                </div>
+            </div>
+        </section>
+    </div>
+    </div>
+</body>
+<script src="./../dist/app.js"></script>
+</html>
