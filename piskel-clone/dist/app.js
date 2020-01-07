@@ -90,17 +90,22 @@
 /*!**********************************!*\
   !*** ./src/components/piskel.js ***!
   \**********************************/
-/*! exports provided: mypiskel, MyPiskelClone */
+/*! exports provided: mypiskel, MyPiskelClone, grid */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mypiskel", function() { return mypiskel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyPiskelClone", function() { return MyPiskelClone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grid", function() { return grid; });
 const canvas = document.querySelector('.mainbox');
 const firstpage = document.querySelector('.start-page');
 const startbtn = document.querySelector('.start-btn');
 const gobackbtn = document.querySelector('.TODO')//TO DO
+const canvas_item = document.querySelector('.canvas');
+const grid = document.createElement('div');
+grid.classList.add('canvas_grid');
+const CANVAS_SIZE = 768;
 class MyPiskelClone{
     constructor(firstpage,canvas,startbtn,gobackbtn){
         this.firstpage = firstpage;
@@ -119,6 +124,19 @@ class MyPiskelClone{
     StartPiskel(){
         this.firstpage.style = "display:none";
         this.canvas.style = "display:block";
+        
+        canvas_item.appendChild(grid);
+        for(let i = 0 ; i < CANVAS_SIZE; i+=32){
+            console.log('work');
+            let canvas_line = document.createElement('div');
+            for(let j = 0 ; j < CANVAS_SIZE ; j+=32){
+            let node = document.createElement('div');
+            node.classList.add('canvas_squade');
+            canvas_line.appendChild(node);
+            canvas_line.classList.add('canvas_line');
+        }
+        grid.appendChild(canvas_line);
+        }
     }
     GoLending(){
         this.firstpage.style = "display:block";
@@ -495,16 +513,22 @@ function CanvasFloodFiller()
 /*!****************************************!*\
   !*** ./src/components/tools/canvas.js ***!
   \****************************************/
-/*! exports provided: canvas, ctx */
+/*! exports provided: canvas, ctx, saveImage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canvas", function() { return canvas; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ctx", function() { return ctx; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveImage", function() { return saveImage; });
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+ 
+function saveImage() {
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+    window.location.href=image; // it will save locally
+}
 
 
 /***/ }),
@@ -650,9 +674,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pencil_pencil_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pencil/pencil.js */ "./src/components/tools/pencil/pencil.js");
 /* harmony import */ var _tools_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools.js */ "./src/components/tools/tools.js");
 /* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas.js */ "./src/components/tools/canvas.js");
+/* harmony import */ var _SizeTool_sizetools_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../SizeTool/sizetools.js */ "./src/components/tools/SizeTool/sizetools.js");
 
 
 
+
+var flag = false;
 class Stroke extends _pencil_pencil_js__WEBPACK_IMPORTED_MODULE_0__["Pencil"]{
     constructor(color){
         super(color);
@@ -666,7 +693,11 @@ class Stroke extends _pencil_pencil_js__WEBPACK_IMPORTED_MODULE_0__["Pencil"]{
     MouseDown(e){
         console.log('stroke work');
         if(_tools_js__WEBPACK_IMPORTED_MODULE_1__["tools"].id == 'stroke'){
-
+            if(flag){
+                this.startPixel = {x:0, y:0};
+                this.nextPixel = {x:0, y:0,};
+                flag = !flag;
+            }
             if(!this.state){
                 this.startPixel.x =  e.pageX - _canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].offsetLeft;
                 this.startPixel.y = e.pageY - _canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].offsetTop;
@@ -675,10 +706,46 @@ class Stroke extends _pencil_pencil_js__WEBPACK_IMPORTED_MODULE_0__["Pencil"]{
             else{
                 this.nextPixel.x = e.pageX - _canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].offsetLeft;
                 this.nextPixel.y = e.pageY - _canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].offsetTop;
+                this.state = !this.state;
+                flag = !flag;
+
             }
-            console.log(this.startPixel.x + " start " + this.startPixel.y);
-            console.log(this.nextPixel.x + " next "+ this.nextPixel.y);
             if(this.startPixel.x != 0 && this.nextPixel.x != 0){
+                if(Math.abs(this.nextPixel.y - this.startPixel.y) <= _SizeTool_sizetools_js__WEBPACK_IMPORTED_MODULE_3__["size"].item_size){
+                    let width = this.nextPixel.x - this.startPixel.x;
+                    if(width <= _SizeTool_sizetools_js__WEBPACK_IMPORTED_MODULE_3__["size"].item_size * 2){
+                        this.setPixel(this.startPixel.x,this.startPixel.y);
+                        this.setPixel(this.nextPixel.x,this.nextPixel.y);
+                    }
+                    if(width <= 0){
+                        for(let i = this.nextPixel.x; i <= this.startPixel.x; i++){
+                            this.setPixel(i,this.nextPixel.y);
+                        }
+                    }
+                    else{
+                        for(let i = this.startPixel.x; i <= this.nextPixel.x; i++){
+                            this.setPixel(i,this.startPixel.y);
+                        }    
+                    }
+                }
+                else{
+                    if(Math.abs(this.nextPixel.x - this.startPixel.x) <= _SizeTool_sizetools_js__WEBPACK_IMPORTED_MODULE_3__["size"].item_size){
+                        let heigth = this.nextPixel.y - this.startPixel.y;
+                        if(heigth <= 0){
+                            for(let i = this.nextPixel.y; i <= this.startPixel.y; i++){
+                                this.setPixel(this.nextPixel.x, i);
+                            }
+                        }
+                        else{
+                            for(let i = this.startPixel.y; i <= this.nextPixel.y; i++){
+                                this.setPixel(this.startPixel.x, i);
+                            }    
+                        }
+                        
+                    }
+                    this.startPixel = {x:0, y:0};
+                    this.nextPixel = {x:0, y:0,};
+                }
                 
             }    
         }
@@ -755,7 +822,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].addEventListener('mousedown', (event)=>{
+
+_components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mousedown', (event)=>{
+    console.log(event);
     switch (_components_tools_tools_js__WEBPACK_IMPORTED_MODULE_1__["tools"].id) {
         case "pencil":_components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].MouseDown(event);break;
         case "allbucket":break;
@@ -765,7 +834,8 @@ _components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].addEventListe
             break;
     }
 });
-_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].addEventListener('mousemove',(event)=>{
+_components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mousemove',(event)=>{
+  
    switch (_components_tools_tools_js__WEBPACK_IMPORTED_MODULE_1__["tools"].id) {
        case "pencil":_components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].Mousemove(event);break;
        case "eraser":_components_tools_eraser_eraser_js__WEBPACK_IMPORTED_MODULE_5__["eraser"].Mousemove(event);break;
@@ -774,18 +844,14 @@ _components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].addEventListe
    }
     
 });
-_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas"].addEventListener('mouseup', (event)=>{
+_components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mouseup', (event)=>{
     switch (_components_tools_tools_js__WEBPACK_IMPORTED_MODULE_1__["tools"].id) {
-        case "pencil": _components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].Mouseup(event);;break;
+        case "pencil": _components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].Mouseup(event);Object(_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["saveImage"])();break;
         case "eraser":_components_tools_eraser_eraser_js__WEBPACK_IMPORTED_MODULE_5__["eraser"].Mouseup(event);break;
         default:
             break;
     }
 });
-/* canvas.addEventListener('mousedown', (event)=>{
-    bucket.MouseDown(event);
-}); */
-
 
 /***/ }),
 

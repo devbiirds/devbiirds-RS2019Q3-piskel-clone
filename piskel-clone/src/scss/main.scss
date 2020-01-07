@@ -39,3 +39,33 @@ height: 100%;
 .start-page__wrapper--description{
     display: flex;
 }
+.canvas__pallete{
+    position: absolute;
+    
+}
+.canvas_grid{
+    position: absolute;
+    height: 768px;
+    width: 768px;
+    opacity: 0.3;
+    -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+.canvas_line{
+    display: flex;
+    z-index: 10;
+    height: 32px;
+}
+.canvas_squade{
+border:1px solid black;
+height: 32px;
+width: 32px;
+}

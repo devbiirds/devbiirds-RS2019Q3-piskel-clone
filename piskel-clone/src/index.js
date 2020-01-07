@@ -1,12 +1,14 @@
 import './scss/main.scss';
 import {tools} from './components/tools/tools.js';
-import {canvas , ctx} from './components/tools/canvas.js';
+import {canvas,saveImage} from './components/tools/canvas.js';
 import {pencil} from './components/tools/pencil/pencil';
 import {bucket} from './components/tools/bucket/bucket.js';
 import {eraser} from './components/tools/eraser/eraser.js';
-import {mypiskel} from './components/piskel.js';
+import {grid} from './components/piskel.js';
 import {stroke} from './components/tools/stroke/stroke.js';
-canvas.addEventListener('mousedown', (event)=>{
+
+grid.addEventListener('mousedown', (event)=>{
+    console.log(event);
     switch (tools.id) {
         case "pencil":pencil.MouseDown(event);break;
         case "allbucket":break;
@@ -16,7 +18,8 @@ canvas.addEventListener('mousedown', (event)=>{
             break;
     }
 });
-canvas.addEventListener('mousemove',(event)=>{
+grid.addEventListener('mousemove',(event)=>{
+  
    switch (tools.id) {
        case "pencil":pencil.Mousemove(event);break;
        case "eraser":eraser.Mousemove(event);break;
@@ -25,14 +28,11 @@ canvas.addEventListener('mousemove',(event)=>{
    }
     
 });
-canvas.addEventListener('mouseup', (event)=>{
+grid.addEventListener('mouseup', (event)=>{
     switch (tools.id) {
-        case "pencil": pencil.Mouseup(event);;break;
+        case "pencil": pencil.Mouseup(event);saveImage();break;
         case "eraser":eraser.Mouseup(event);break;
         default:
             break;
     }
 });
-/* canvas.addEventListener('mousedown', (event)=>{
-    bucket.MouseDown(event);
-}); */
