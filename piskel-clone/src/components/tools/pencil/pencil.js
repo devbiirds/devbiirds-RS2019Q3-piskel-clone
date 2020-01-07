@@ -15,7 +15,6 @@ class Pencil{
         this.mouse.x = e.pageX - canvas.offsetLeft;
         this.mouse.y = e.pageY - canvas.offsetTop;
         this.setPixel(this.mouse.x,this.mouse.y);
-        console.log(this.mouse.x,this.mouse.y);
         this.draw = true;
         }
     }

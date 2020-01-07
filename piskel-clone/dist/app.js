@@ -98,12 +98,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mypiskel", function() { return mypiskel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyPiskelClone", function() { return MyPiskelClone; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grid", function() { return grid; });
+/* harmony import */ var _tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools/canvas.js */ "./src/components/tools/canvas.js");
+/* harmony import */ var _tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools/Frame/frame.js */ "./src/components/tools/Frame/frame.js");
+
+
+
 const canvas = document.querySelector('.mainbox');
 const firstpage = document.querySelector('.start-page');
 const startbtn = document.querySelector('.start-btn');
 const gobackbtn = document.querySelector('.TODO')//TO DO
 const canvas_item = document.querySelector('.canvas');
 const grid = document.createElement('div');
+
 grid.classList.add('canvas_grid');
 const CANVAS_SIZE = 768;
 class MyPiskelClone{
@@ -124,10 +130,10 @@ class MyPiskelClone{
     StartPiskel(){
         this.firstpage.style = "display:none";
         this.canvas.style = "display:block";
-        
+        _tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].Load();
+        _tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_1__["framebox"].Add(_tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].saveImage());
         canvas_item.appendChild(grid);
         for(let i = 0 ; i < CANVAS_SIZE; i+=32){
-            console.log('work');
             let canvas_line = document.createElement('div');
             for(let j = 0 ; j < CANVAS_SIZE ; j+=32){
             let node = document.createElement('div');
@@ -145,6 +151,57 @@ class MyPiskelClone{
 
 }
 const mypiskel = new MyPiskelClone(firstpage,canvas,startbtn,gobackbtn);
+
+
+/***/ }),
+
+/***/ "./src/components/tools/Frame/frame.js":
+/*!*********************************************!*\
+  !*** ./src/components/tools/Frame/frame.js ***!
+  \*********************************************/
+/*! exports provided: framebox, Frame */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "framebox", function() { return framebox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Frame", function() { return Frame; });
+/* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas.js */ "./src/components/tools/canvas.js");
+
+const frame = document.querySelector('.frame');
+const CANVAS_SIZE = 768;
+class Frame {
+    constructor(){
+        this.counter = 0;
+        this.Currentframe = null;
+        this.listFrame = [];
+        this.btn = document.querySelector('.frame--add')
+        this.btn.addEventListener('click',()=>{
+            _canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].Load();
+            this.Add(_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].saveImage())
+        });
+    }
+    Add(data){
+          let frame_item = document.createElement('img');
+          frame_item.src = data;
+          frame_item.classList.add('frame__item');
+          this.Currentframe = frame_item;
+         frame.insertBefore(frame_item,frame.firstChild);
+          this.listFrame.push(frame)
+         this.counter++;
+    }
+    Delete(){
+
+    }
+    Move(){
+
+    }
+    ChangingFrame(data){
+        this.Currentframe.src = data;
+    }
+}
+
+const framebox = new Frame();
 
 
 /***/ }),
@@ -513,23 +570,35 @@ function CanvasFloodFiller()
 /*!****************************************!*\
   !*** ./src/components/tools/canvas.js ***!
   \****************************************/
-/*! exports provided: canvas, ctx, saveImage */
+/*! exports provided: canvas, ctx, canvas_pallete */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canvas", function() { return canvas; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ctx", function() { return ctx; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveImage", function() { return saveImage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canvas_pallete", function() { return canvas_pallete; });
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
- 
-function saveImage() {
-    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
-    window.location.href=image; // it will save locally
-}
+const CANVAS_SIZE = 768;
 
+class Canvas{
+constructor(canvas,ctx){
+    this.canvas  = canvas;
+    this.ctx = ctx;
+}
+saveImage() {
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+  return image;
+}
+Load(){
+    this.ctx.fillStyle = "#fff";
+    this.ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
+}
+}
+const canvas_pallete = new Canvas(canvas, ctx);
+ 
 
 /***/ }),
 
@@ -591,7 +660,6 @@ class Pencil{
         this.mouse.x = e.pageX - _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"].offsetLeft;
         this.mouse.y = e.pageY - _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"].offsetTop;
         this.setPixel(this.mouse.x,this.mouse.y);
-        console.log(this.mouse.x,this.mouse.y);
         this.draw = true;
         }
     }
@@ -814,6 +882,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tools_eraser_eraser_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/tools/eraser/eraser.js */ "./src/components/tools/eraser/eraser.js");
 /* harmony import */ var _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/piskel.js */ "./src/components/piskel.js");
 /* harmony import */ var _components_tools_stroke_stroke_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/tools/stroke/stroke.js */ "./src/components/tools/stroke/stroke.js");
+/* harmony import */ var _components_tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/tools/Frame/frame.js */ "./src/components/tools/Frame/frame.js");
+
+
+
 
 
 
@@ -833,6 +905,7 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mou
         default:
             break;
     }
+
 });
 _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mousemove',(event)=>{
   
@@ -846,11 +919,12 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mou
 });
 _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mouseup', (event)=>{
     switch (_components_tools_tools_js__WEBPACK_IMPORTED_MODULE_1__["tools"].id) {
-        case "pencil": _components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].Mouseup(event);Object(_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["saveImage"])();break;
+        case "pencil": _components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].Mouseup(event);break;
         case "eraser":_components_tools_eraser_eraser_js__WEBPACK_IMPORTED_MODULE_5__["eraser"].Mouseup(event);break;
         default:
             break;
     }
+    _components_tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_8__["framebox"].ChangingFrame(_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas_pallete"].saveImage());
 });
 
 /***/ }),
@@ -862,7 +936,7 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mou
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/dist/cjs.js):\nModuleParseError: Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> <svg aria-hidden=\"true\" focusable=\"false\" data-prefix=\"fas\" data-icon=\"trash-alt\" class=\"svg-inline--fa fa-trash-alt fa-w-14\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z\"></path></svg>\n    at handleParseError (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\webpack\\lib\\NormalModule.js:469:19)\n    at doBuild.err (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\webpack\\lib\\NormalModule.js:503:5)\n    at runLoaders (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\webpack\\lib\\NormalModule.js:358:12)\n    at C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\loader-runner\\lib\\LoaderRunner.js:373:3\n    at iterateNormalLoaders (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\loader-runner\\lib\\LoaderRunner.js:214:10)\n    at C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\loader-runner\\lib\\LoaderRunner.js:205:4\n    at process.nextTick (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:85:15)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
 
 /***/ })
 

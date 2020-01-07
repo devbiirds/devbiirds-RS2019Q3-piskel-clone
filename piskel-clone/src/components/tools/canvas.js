@@ -1,9 +1,21 @@
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
- 
-function saveImage() {
-    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
-    window.location.href=image; // it will save locally
+const CANVAS_SIZE = 768;
+
+class Canvas{
+constructor(canvas,ctx){
+    this.canvas  = canvas;
+    this.ctx = ctx;
 }
-export {canvas, ctx, saveImage};
+saveImage() {
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+  return image;
+}
+Load(){
+    this.ctx.fillStyle = "#fff";
+    this.ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
+}
+}
+const canvas_pallete = new Canvas(canvas, ctx);
+export {canvas, ctx, canvas_pallete}; 

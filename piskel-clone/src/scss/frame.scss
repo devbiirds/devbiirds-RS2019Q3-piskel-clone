@@ -1,0 +1,27 @@
+.frame__item{
+    height: 200px;
+    width: 200px;
+    border: 1px solid gray;
+    &::after{
+       content: "";
+       background: url(../assets/img/delete.svg);
+
+    }
+}
+.frame{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: auto;
+    margin-right:10px;
+    &--add{
+        margin-top:20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 50px;
+        border:1px solid #000;
+        cursor: pointer;
+    }
+}

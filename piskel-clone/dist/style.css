@@ -97,6 +97,29 @@ canvas {
   width: 768px;
   height: 768px; }
 
+.frame__item {
+  height: 200px;
+  width: 200px;
+  border: 1px solid gray; }
+  .frame__item::after {
+    content: ""; }
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+  margin-right: 10px; }
+  .frame--add {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: 1px solid #000;
+    cursor: pointer; }
+
 html {
   height: 100%; }
 
