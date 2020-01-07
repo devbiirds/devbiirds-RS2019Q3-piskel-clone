@@ -59,7 +59,7 @@ border:3px solid red;
 }
 .size_active{
     &--small{
-        display: none;
+        visibility: hidden;
         margin-left:5px;
         height: 6px;
         width: 6px;
@@ -67,7 +67,7 @@ border:3px solid red;
         border-radius: 50%;
     }
     &--medium{
-        display: none;
+        visibility: hidden;
         margin-left:5px;
         height: 6px;
         width: 6px;
@@ -75,7 +75,7 @@ border:3px solid red;
         border-radius: 50%;
     }
     &--large{
-        display: none;
+        visibility: hidden;
         margin-left:5px;
         height: 6px;
         width: 6px;

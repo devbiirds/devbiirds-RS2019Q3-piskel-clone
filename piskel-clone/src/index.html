@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.12.0-web/css/all.css">
 </head>
 <body>
+    <div class="start-page">
+        <div class="start-page__wrapper">
+            <div class="start-page__wrapper--start">
+                <div class="start-btn">Start Draw</div>
+            </div>
+            <div class="start-page__wrapper--description">
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+            </div>
+        </div>
+    </div>
     <div class="mainbox">
         <div class="wrapper">
             <header class="header">
@@ -26,19 +38,19 @@
             <div class="tools">
                 <div class="tools__item">
                     <div class="tools__item--size">
-                        <div class="size_info size_small"><span>Small</span><div class="size_active--small"></div></div>
-                        <div class="size_info size_medium"><span> Medium</span><div class="size_active--medium"></div></div>
-                        <div class="size_info size_large"><span>Large</span><div class="size_active--large"></div></div>
+                        <div class="size_info size_small" id="small"><span>Small</span><div class="size_active--small"></div></div>
+                        <div class="size_info size_medium" id="medium"><span> Medium</span><div class="size_active--medium"></div></div>
+                        <div class="size_info size_large" id="large"><span>Large</span><div class="size_active--large"></div></div>
                     </div>
                     <div class="tools__item--elements">
-                            <div class="tools__item--element pencil"><img src="./assets/img/pencil-alt-solid.svg" alt="pencil" class="tools_icon" id="pencil"></div>
-                            <div class="tools__item--element bucket"><img src="./assets/img/fill-drip-solid.svg" alt="bucket" class="tools_icon" id="bucket"></div>
-                            <div class="tools__item--element eraser"><img src="./assets/img/eraser-solid.svg" alt="eraser" class="tools_icon" id="eraser"></div>
-                            <div class="tools__item--element rectangle"><img src="./assets/img/square-regular.svg" alt="squade" class="tools_icon" id="rectangle"></div>
-                            <div class="tools__item--element rectangefull"><img src="./assets/img/square-solid.svg" alt="squade_solid" class="tools_icon" id="rectangefull"></div>
-                            <div class="tools__item--element lighten"><img src="./assets/img/adjust-solid.svg" alt="adjust" class="tools_icon" id="lighten"></div>
-                            <div class="tools__item--element pippete"><img src="./assets/img/eye-dropper-solid.svg" alt="eye-dropper" class="tools_icon" id="pippete"></div>
-                            <div class="tools__item--element allbucket"><img src="./assets/img/fill-solid.svg" alt="bucketFull" class="tools_icon" id="allbucket"></div>
+                            <div class="tools__item--element pencil" id="pencil"><img src="./assets/img/pencil-alt-solid.svg" alt="pencil" class="tools_icon" ></div>
+                            <div class="tools__item--element bucket" id="bucket"><img src="./assets/img/fill-drip-solid.svg" alt="bucket" class="tools_icon" ></div>
+                            <div class="tools__item--element eraser" id="eraser"><img src="./assets/img/eraser-solid.svg" alt="eraser" class="tools_icon" ></div>
+                            <div class="tools__item--element stroke" id="stroke"><img src="./assets/img/square-regular.svg" alt="stroke" class="tools_icon" ></div>
+                            <div class="tools__item--element rectangefull" id="rectangefull"><img src="./assets/img/square-solid.svg" alt="squade_solid" class="tools_icon" ></div>
+                            <div class="tools__item--element lighten" id="lighten"><img src="./assets/img/adjust-solid.svg" alt="adjust" class="tools_icon" ></div>
+                            <div class="tools__item--element pippete" id="pippete"><img src="./assets/img/eye-dropper-solid.svg" alt="eye-dropper" class="tools_icon" ></div>
+                            <div class="tools__item--element allbucket" id="allbucket"><img src="./assets/img/fill-solid.svg" alt="bucketFull" class="tools_icon" ></div>
                     </div>
                     <div class="tools__item--changecolor">
                         <div class="tools__item--changecolor--tool"></div>
