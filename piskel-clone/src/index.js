@@ -39,5 +39,5 @@ grid.addEventListener('mouseup', (event)=>{
         default:
             break;
     }
-    framebox.ChangingFrame(canvas_pallete.saveImage());
+    framebox.ChangingDataFrame(canvas_pallete.saveImage());
 });

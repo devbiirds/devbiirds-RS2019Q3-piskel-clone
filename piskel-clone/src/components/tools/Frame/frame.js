@@ -1,4 +1,4 @@
-import {canvas_pallete} from '../canvas.js';
+import {canvas_pallete,ctx} from '../canvas.js';
 const frame = document.querySelector('.frame');
 const CANVAS_SIZE = 768;
 class Frame {
@@ -13,12 +13,26 @@ class Frame {
         });
     }
     Add(data){
-          let frame_item = document.createElement('img');
-          frame_item.src = data;
-          frame_item.classList.add('frame__item');
-          this.Currentframe = frame_item;
+          let frame_item = document.createElement('div')
+          frame_item.classList.add('frame__item')
+          let frame_image = document.createElement('img');
+          let delete_icon = document.createElement('img');
+          delete_icon.classList.add('delete-elem');
+          frame_image.src = data;
+          frame_image.classList.add('frame__image');
+          frame_item.appendChild(frame_image);
+          frame_item.appendChild(delete_icon);
+          this.Currentframe = frame_image;
          frame.insertBefore(frame_item,frame.firstChild);
-          this.listFrame.push(frame)
+          this.listFrame.push(frame_item)
+            frame_item.addEventListener('click', ()=>{
+                this.listFrame.forEach(item =>{
+                    item.classList.toggle('active-frame',false);
+                })
+                frame_item.classList.add('active-frame');
+                this.ChangeFrame(frame_item,frame_image);
+              })
+          
          this.counter++;
     }
     Delete(){
@@ -27,7 +41,16 @@ class Frame {
     Move(){
 
     }
-    ChangingFrame(data){
+    ChangeFrame(item, imgData){
+        this.Currentframe = imgData;
+        let img = new Image();
+        img.src = imgData.src;
+        console.log(img);
+        ctx.drawImage(img,0,0);
+        
+    }
+    ChangingDataFrame(data){
+        console.log(this.Currentframe);
         this.Currentframe.src = data;
     }
 }

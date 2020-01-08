@@ -182,12 +182,26 @@ class Frame {
         });
     }
     Add(data){
-          let frame_item = document.createElement('img');
-          frame_item.src = data;
-          frame_item.classList.add('frame__item');
-          this.Currentframe = frame_item;
+          let frame_item = document.createElement('div')
+          frame_item.classList.add('frame__item')
+          let frame_image = document.createElement('img');
+          let delete_icon = document.createElement('img');
+          delete_icon.classList.add('delete-elem');
+          frame_image.src = data;
+          frame_image.classList.add('frame__image');
+          frame_item.appendChild(frame_image);
+          frame_item.appendChild(delete_icon);
+          this.Currentframe = frame_image;
          frame.insertBefore(frame_item,frame.firstChild);
-          this.listFrame.push(frame)
+          this.listFrame.push(frame_item)
+            frame_item.addEventListener('click', ()=>{
+                this.listFrame.forEach(item =>{
+                    item.classList.toggle('active-frame',false);
+                })
+                frame_item.classList.add('active-frame');
+                this.ChangeFrame(frame_item,frame_image);
+              })
+          
          this.counter++;
     }
     Delete(){
@@ -196,7 +210,16 @@ class Frame {
     Move(){
 
     }
-    ChangingFrame(data){
+    ChangeFrame(item, imgData){
+        this.Currentframe = imgData;
+        let img = new Image();
+        img.src = imgData.src;
+        console.log(img);
+        _canvas_js__WEBPACK_IMPORTED_MODULE_0__["ctx"].drawImage(img,0,0);
+        
+    }
+    ChangingDataFrame(data){
+        console.log(this.Currentframe);
         this.Currentframe.src = data;
     }
 }
@@ -924,7 +947,7 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mou
         default:
             break;
     }
-    _components_tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_8__["framebox"].ChangingFrame(_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas_pallete"].saveImage());
+    _components_tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_8__["framebox"].ChangingDataFrame(_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas_pallete"].saveImage());
 });
 
 /***/ }),
@@ -936,7 +959,7 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mou
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/dist/cjs.js):\nModuleParseError: Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> <svg aria-hidden=\"true\" focusable=\"false\" data-prefix=\"fas\" data-icon=\"trash-alt\" class=\"svg-inline--fa fa-trash-alt fa-w-14\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z\"></path></svg>\n    at handleParseError (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\webpack\\lib\\NormalModule.js:469:19)\n    at doBuild.err (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\webpack\\lib\\NormalModule.js:503:5)\n    at runLoaders (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\webpack\\lib\\NormalModule.js:358:12)\n    at C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\loader-runner\\lib\\LoaderRunner.js:373:3\n    at iterateNormalLoaders (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\loader-runner\\lib\\LoaderRunner.js:214:10)\n    at C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\loader-runner\\lib\\LoaderRunner.js:205:4\n    at process.nextTick (C:\\Users\\Vadim\\Desktop\\Piskel-clone\\piskel-clone\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:85:15)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ })
 

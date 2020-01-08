@@ -27,7 +27,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|svg)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -39,6 +39,10 @@ module.exports = {
         exclude: '/node_modules/',
         use: ['babel-loader', 'eslint-loader'],
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+    }
     ],
   },
   plugins: [
