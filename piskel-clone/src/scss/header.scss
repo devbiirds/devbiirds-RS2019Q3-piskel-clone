@@ -1,12 +1,23 @@
+@-webkit-keyframes title {
+    0%   { color: blue; }
+    50% { color: green; }
+    100%   { color: blue; }
+  }
 .header{
     margin:0 auto;
+    margin-top:10px;
     width: 90%;
     display: flex;
     justify-content: space-between;
     &__nav{
-        width: 300px;
+        width: 600px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &--title{
+            width: 500px;
+            font-size: 30px;
+            animation: title 10s infinite;
+        }
     }
 }

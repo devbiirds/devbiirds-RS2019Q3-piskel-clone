@@ -5,9 +5,11 @@
 @import './show';
 html{
     height: 100%;
+    font-family: "Piksel";
 }
 body{
     height: 100%;
+    font-family: 'Orbitron', sans-serif;
 }
 .mainbox{
     width: 100%;
@@ -34,9 +36,18 @@ height: 100%;
         align-items: center;
     }
 }
+@-webkit-keyframes startPiskel {
+    0%   { font-size: 40px;color: blue; }
+    50% { font-size: 60px;color: green; }
+    100%   { font-size: 40px;color: blue; }
+  }
+  .start-page__wrapper--start{
+      height: 400px;
+  }
 .start-btn{
     font-size: 40px;
     cursor: pointer;
+    animation: startPiskel 2s infinite; 
 }
 .start-page__wrapper--description{
     display: flex;
@@ -49,7 +60,7 @@ height: 100%;
     position: absolute;
     height: 768px;
     width: 768px;
-    opacity: 0.3;
+    opacity: 0.2;
     -moz-user-select: -moz-none;
    -khtml-user-select: none;
    -webkit-user-select: none;
@@ -71,3 +82,14 @@ border:1px solid black;
 height: 32px;
 width: 32px;
 }
+.inline{
+    height: 70px;
+    width: 180px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+

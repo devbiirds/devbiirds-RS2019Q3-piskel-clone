@@ -15,8 +15,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-left: 30px;
-            font-size:16px;
+            margin-left: 10px;
+            font-size:20px;
             padding:6px;
             span{
                 cursor: pointer;
@@ -42,7 +42,8 @@
     }
 }
 .tools_section{
-    height: 97%;
+    margin-top:40px;
+    height: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;

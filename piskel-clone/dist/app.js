@@ -253,28 +253,35 @@ const fps_image = document.querySelector('.canvas__tools--show-canvas');
 let image = document.createElement('img');
 image.classList.add('fps-image')
 class Show {
-    constructor(){
+    constructor(fps_range){
         this.interval = null;
+        this.range = fps_range;
+        this.fps = 0;
+        this.range.addEventListener('change',(event)=>{
+            this.fps = this.range.value
+            console.log("framebox = "+_Frame_frame_js__WEBPACK_IMPORTED_MODULE_0__["framebox"].counter)
+            animation.FPS_SHOW(_Frame_frame_js__WEBPACK_IMPORTED_MODULE_0__["framebox"].counter - 1);
+        })
     }
-    NextFrame(image, counter){ 
+    NextFrame(image, counter){
+        console.log('counter = ' + counter) 
         if(counter !== undefined)
         image.src = _Frame_frame_js__WEBPACK_IMPORTED_MODULE_0__["framebox"].listFrame[counter].src;
     }
     FPS_SHOW(counter){
         clearInterval(this.interval);
-        console.log("counter = "+counter);
         fps_image.appendChild(image);
         let i = 0;
         this.interval = setInterval(()=> {
         if(counter == 0) i = 0;
         if(i >= counter + 1  ) i = 0;
         else { this.NextFrame(image, i);i++;} 
-    }, 12); 
+    }, 1000/this.fps); 
         
     }
 }
 
-const animation = new Show();
+const animation = new Show(fps_range);
 
 
 /***/ }),
@@ -996,6 +1003,17 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__["grid"].addEventListener('mou
     }
     _components_tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_8__["framebox"].ChangingDataFrame(_components_tools_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas_pallete"].saveImage());
 });
+var input_color = document.getElementById("input_color");
+function ChangeColor() {
+    
+    input_color.click();
+    input_color.addEventListener("change", function() {
+      _components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].color = input_color.value;
+      _components_tools_stroke_stroke_js__WEBPACK_IMPORTED_MODULE_7__["stroke"].color = input_color.value;
+    });
+  }
+input_color.addEventListener('click',ChangeColor)
+  
 
 /***/ }),
 

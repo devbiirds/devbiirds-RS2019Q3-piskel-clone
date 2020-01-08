@@ -38,3 +38,14 @@ grid.addEventListener('mouseup', (event)=>{
     }
     framebox.ChangingDataFrame(canvas_pallete.saveImage());
 });
+var input_color = document.getElementById("input_color");
+function ChangeColor() {
+    
+    input_color.click();
+    input_color.addEventListener("change", function() {
+      pencil.color = input_color.value;
+      stroke.color = input_color.value;
+    });
+  }
+input_color.addEventListener('click',ChangeColor)
+  
