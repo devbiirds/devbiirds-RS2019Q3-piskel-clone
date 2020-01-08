@@ -7,8 +7,8 @@ class Show {
     constructor(){
         this.interval = null;
     }
-    NextFrame(image, counter){
-        console.log("counter In NextFrame"+counter);
+    NextFrame(image, counter){ 
+        if(counter !== undefined)
         image.src = framebox.listFrame[counter].src;
     }
     FPS_SHOW(counter){
@@ -17,10 +17,10 @@ class Show {
         fps_image.appendChild(image);
         let i = 0;
         this.interval = setInterval(()=> {
-        console.log("i = " + i);
-        if(i == counter ) i = 0;
+        if(counter == 0) i = 0;
+        if(i >= counter + 1  ) i = 0;
         else { this.NextFrame(image, i);i++;} 
-    }, 3520); 
+    }, 12); 
         
     }
 }

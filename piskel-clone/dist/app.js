@@ -133,7 +133,7 @@ class MyPiskelClone{
         this.canvas.style = "display:block";
         _tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].Load();
         _tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_1__["framebox"].Add(_tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].saveImage());
-        _tools_Show_show_js__WEBPACK_IMPORTED_MODULE_2__["animation"].FPS_SHOW();
+        _tools_Show_show_js__WEBPACK_IMPORTED_MODULE_2__["animation"].FPS_SHOW(0); 
         canvas_item.appendChild(grid);
         for(let i = 0 ; i < CANVAS_SIZE; i+=32){
             let canvas_line = document.createElement('div');
@@ -205,6 +205,7 @@ class Frame {
                 frame_item.classList.add('active-frame');
                 this.ChangeFrame(frame_item,frame_image);
               })
+              console.log('work')
         _Show_show_js__WEBPACK_IMPORTED_MODULE_1__["animation"].FPS_SHOW(this.counter); 
          this.counter++;
          
@@ -255,8 +256,8 @@ class Show {
     constructor(){
         this.interval = null;
     }
-    NextFrame(image, counter){
-        console.log("counter In NextFrame"+counter);
+    NextFrame(image, counter){ 
+        if(counter !== undefined)
         image.src = _Frame_frame_js__WEBPACK_IMPORTED_MODULE_0__["framebox"].listFrame[counter].src;
     }
     FPS_SHOW(counter){
@@ -265,10 +266,10 @@ class Show {
         fps_image.appendChild(image);
         let i = 0;
         this.interval = setInterval(()=> {
-        console.log("i = " + i);
-        if(i == counter ) i = 0;
+        if(counter == 0) i = 0;
+        if(i >= counter + 1  ) i = 0;
         else { this.NextFrame(image, i);i++;} 
-    }, 3520); 
+    }, 12); 
         
     }
 }

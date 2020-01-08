@@ -33,6 +33,7 @@ class Frame {
                 frame_item.classList.add('active-frame');
                 this.ChangeFrame(frame_item,frame_image);
               })
+              console.log('work')
         animation.FPS_SHOW(this.counter); 
          this.counter++;
          

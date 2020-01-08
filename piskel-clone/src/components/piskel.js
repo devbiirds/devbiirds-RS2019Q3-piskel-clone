@@ -30,7 +30,7 @@ class MyPiskelClone{
         this.canvas.style = "display:block";
         canvas_pallete.Load();
         framebox.Add(canvas_pallete.saveImage());
-        animation.FPS_SHOW();
+        animation.FPS_SHOW(0); 
         canvas_item.appendChild(grid);
         for(let i = 0 ; i < CANVAS_SIZE; i+=32){
             let canvas_line = document.createElement('div');
