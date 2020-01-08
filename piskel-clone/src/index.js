@@ -7,9 +7,6 @@ import {eraser} from './components/tools/eraser/eraser.js';
 import {grid} from './components/piskel.js';
 import {stroke} from './components/tools/stroke/stroke.js';
 import {framebox} from './components/tools/Frame/frame.js';
-
-
-
 grid.addEventListener('mousedown', (event)=>{
     console.log(event);
     switch (tools.id) {

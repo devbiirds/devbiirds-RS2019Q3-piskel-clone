@@ -100,6 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grid", function() { return grid; });
 /* harmony import */ var _tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools/canvas.js */ "./src/components/tools/canvas.js");
 /* harmony import */ var _tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools/Frame/frame.js */ "./src/components/tools/Frame/frame.js");
+/* harmony import */ var _tools_Show_show_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools/Show/show.js */ "./src/components/tools/Show/show.js");
 
 
 
@@ -132,6 +133,7 @@ class MyPiskelClone{
         this.canvas.style = "display:block";
         _tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].Load();
         _tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_1__["framebox"].Add(_tools_canvas_js__WEBPACK_IMPORTED_MODULE_0__["canvas_pallete"].saveImage());
+        _tools_Show_show_js__WEBPACK_IMPORTED_MODULE_2__["animation"].FPS_SHOW();
         canvas_item.appendChild(grid);
         for(let i = 0 ; i < CANVAS_SIZE; i+=32){
             let canvas_line = document.createElement('div');
@@ -167,6 +169,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "framebox", function() { return framebox; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Frame", function() { return Frame; });
 /* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas.js */ "./src/components/tools/canvas.js");
+/* harmony import */ var _Show_show_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Show/show.js */ "./src/components/tools/Show/show.js");
+
 
 const frame = document.querySelector('.frame');
 const CANVAS_SIZE = 768;
@@ -193,7 +197,7 @@ class Frame {
           frame_item.appendChild(delete_icon);
           this.Currentframe = frame_image;
          frame.insertBefore(frame_item,frame.firstChild);
-          this.listFrame.push(frame_item)
+          this.listFrame.push(frame_image)
             frame_item.addEventListener('click', ()=>{
                 this.listFrame.forEach(item =>{
                     item.classList.toggle('active-frame',false);
@@ -201,8 +205,9 @@ class Frame {
                 frame_item.classList.add('active-frame');
                 this.ChangeFrame(frame_item,frame_image);
               })
-          
+        _Show_show_js__WEBPACK_IMPORTED_MODULE_1__["animation"].FPS_SHOW(this.counter); 
          this.counter++;
+         
     }
     Delete(){
 
@@ -214,17 +219,61 @@ class Frame {
         this.Currentframe = imgData;
         let img = new Image();
         img.src = imgData.src;
-        console.log(img);
+        
         _canvas_js__WEBPACK_IMPORTED_MODULE_0__["ctx"].drawImage(img,0,0);
         
     }
     ChangingDataFrame(data){
-        console.log(this.Currentframe);
+        
         this.Currentframe.src = data;
     }
 }
 
 const framebox = new Frame();
+
+
+/***/ }),
+
+/***/ "./src/components/tools/Show/show.js":
+/*!*******************************************!*\
+  !*** ./src/components/tools/Show/show.js ***!
+  \*******************************************/
+/*! exports provided: animation, Show */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animation", function() { return animation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Show", function() { return Show; });
+/* harmony import */ var _Frame_frame_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Frame/frame.js */ "./src/components/tools/Frame/frame.js");
+
+const fps_range = document.querySelector('.fps');
+const fps_image = document.querySelector('.canvas__tools--show-canvas');
+let image = document.createElement('img');
+image.classList.add('fps-image')
+class Show {
+    constructor(){
+        this.interval = null;
+    }
+    NextFrame(image, counter){
+        console.log("counter In NextFrame"+counter);
+        image.src = _Frame_frame_js__WEBPACK_IMPORTED_MODULE_0__["framebox"].listFrame[counter].src;
+    }
+    FPS_SHOW(counter){
+        clearInterval(this.interval);
+        console.log("counter = "+counter);
+        fps_image.appendChild(image);
+        let i = 0;
+        this.interval = setInterval(()=> {
+        console.log("i = " + i);
+        if(i == counter ) i = 0;
+        else { this.NextFrame(image, i);i++;} 
+    }, 3520); 
+        
+    }
+}
+
+const animation = new Show();
 
 
 /***/ }),
@@ -906,9 +955,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_piskel_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/piskel.js */ "./src/components/piskel.js");
 /* harmony import */ var _components_tools_stroke_stroke_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/tools/stroke/stroke.js */ "./src/components/tools/stroke/stroke.js");
 /* harmony import */ var _components_tools_Frame_frame_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/tools/Frame/frame.js */ "./src/components/tools/Frame/frame.js");
-
-
-
 
 
 

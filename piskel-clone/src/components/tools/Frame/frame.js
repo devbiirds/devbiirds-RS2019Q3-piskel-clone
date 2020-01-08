@@ -1,4 +1,5 @@
 import {canvas_pallete,ctx} from '../canvas.js';
+import {animation, Show} from '../Show/show.js';
 const frame = document.querySelector('.frame');
 const CANVAS_SIZE = 768;
 class Frame {
@@ -24,7 +25,7 @@ class Frame {
           frame_item.appendChild(delete_icon);
           this.Currentframe = frame_image;
          frame.insertBefore(frame_item,frame.firstChild);
-          this.listFrame.push(frame_item)
+          this.listFrame.push(frame_image)
             frame_item.addEventListener('click', ()=>{
                 this.listFrame.forEach(item =>{
                     item.classList.toggle('active-frame',false);
@@ -32,8 +33,9 @@ class Frame {
                 frame_item.classList.add('active-frame');
                 this.ChangeFrame(frame_item,frame_image);
               })
-          
+        animation.FPS_SHOW(this.counter); 
          this.counter++;
+         
     }
     Delete(){
 
@@ -45,12 +47,12 @@ class Frame {
         this.Currentframe = imgData;
         let img = new Image();
         img.src = imgData.src;
-        console.log(img);
+        
         ctx.drawImage(img,0,0);
         
     }
     ChangingDataFrame(data){
-        console.log(this.Currentframe);
+        
         this.Currentframe.src = data;
     }
 }

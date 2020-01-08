@@ -1,6 +1,6 @@
 import {canvas_pallete} from './tools/canvas.js';
 import {framebox} from './tools/Frame/frame.js';
-
+import {animation} from './tools/Show/show.js';
 const canvas = document.querySelector('.mainbox');
 const firstpage = document.querySelector('.start-page');
 const startbtn = document.querySelector('.start-btn');
@@ -30,6 +30,7 @@ class MyPiskelClone{
         this.canvas.style = "display:block";
         canvas_pallete.Load();
         framebox.Add(canvas_pallete.saveImage());
+        animation.FPS_SHOW();
         canvas_item.appendChild(grid);
         for(let i = 0 ; i < CANVAS_SIZE; i+=32){
             let canvas_line = document.createElement('div');
