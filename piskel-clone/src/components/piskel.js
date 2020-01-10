@@ -1,13 +1,12 @@
-import {canvas_pallete} from './tools/canvas.js';
-import {framebox} from './tools/Frame/frame.js';
-import {animation} from './tools/Show/show.js';
+import {canvas_pallete} from './canvas.js';
+import {framebox} from './Frame/frame.js';
+import {animation} from './Show/show.js';
 const canvas = document.querySelector('.mainbox');
 const firstpage = document.querySelector('.start-page');
 const startbtn = document.querySelector('.start-btn');
-const gobackbtn = document.querySelector('.TODO')//TO DO
 const canvas_item = document.querySelector('.canvas');
 const grid = document.createElement('div');
-
+const gobackbtn = document.querySelector('.header_exit');
 grid.classList.add('canvas_grid');
 const CANVAS_SIZE = 768;
 class MyPiskelClone{
@@ -19,9 +18,9 @@ class MyPiskelClone{
         this.startbtn.addEventListener('click',()=>{
             this.StartPiskel();
         })
-        /* this.gobackbtn.addEventListener('click',()=>{
+        this.gobackbtn.addEventListener('click',()=>{
             this.GoLending();
-        }) */
+        })
     
     }
     
@@ -44,8 +43,11 @@ class MyPiskelClone{
         }
     }
     GoLending(){
-        this.firstpage.style = "display:block";
-        this.canvas.srtle = "display:none";
+        while (grid.firstChild) {
+            grid.removeChild(grid.firstChild);
+          }
+        this.firstpage.style = "display:flex;";
+        this.canvas.style = "display:none;";
     }
 
 }

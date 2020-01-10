@@ -1,6 +1,6 @@
-import {pencil,Pencil} from '../pencil/pencil.js';
+import {Pencil} from '../pencil/pencil.js';
 import {tools} from '../tools.js';
-import {canvas} from "../canvas.js";
+import {canvas} from "../../canvas.js";
 import {size} from '../SizeTool/sizetools.js';
 var flag = false;
 class Stroke extends Pencil{
@@ -10,11 +10,7 @@ class Stroke extends Pencil{
         this.nextPixel = {x:0, y:0,};
         this.state = false;
     }
-    Stroke(x,y){
-    
-    }
     MouseDown(e){
-        console.log('stroke work');
         if(tools.id == 'stroke'){
             if(flag){
                 this.startPixel = {x:0, y:0};

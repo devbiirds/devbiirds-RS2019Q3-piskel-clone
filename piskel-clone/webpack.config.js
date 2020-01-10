@@ -1,8 +1,9 @@
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index.js',
+  entry:['./src/index.js','./src/index.html'],
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -46,6 +47,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html"
+    }),
     new ExtractTextPlugin('style.css'),
   ],
 };

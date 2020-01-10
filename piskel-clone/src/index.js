@@ -1,19 +1,19 @@
 import './scss/main.scss';
-import {tools} from './components/tools/tools.js';
-import {canvas, canvas_pallete} from './components/tools/canvas.js';
+import {tools, Tools} from './components/tools/tools.js';
+import {canvas, canvas_pallete} from './components/canvas.js';
 import {pencil} from './components/tools/pencil/pencil';
-import {bucket} from './components/tools/bucket/bucket.js';
 import {eraser} from './components/tools/eraser/eraser.js';
 import {grid} from './components/piskel.js';
 import {stroke} from './components/tools/stroke/stroke.js';
-import {framebox} from './components/tools/Frame/frame.js';
+import {framebox} from './components/Frame/frame.js';
+import {bucket} from './components/tools/bucket/bucket.js';
 grid.addEventListener('mousedown', (event)=>{
-    console.log(event);
     switch (tools.id) {
         case "pencil":pencil.MouseDown(event);break;
         case "allbucket":break;
         case "eraser":eraser.MouseDown(event);break;
-        case "stroke":console.log(stroke);stroke.MouseDown(event);break;
+        case "stroke":stroke.MouseDown(event);break;
+        case 'bucket':bucket.MouseDown(event);break;
         default:
             break;
     }
@@ -45,7 +45,7 @@ function ChangeColor() {
     input_color.addEventListener("change", function() {
       pencil.color = input_color.value;
       stroke.color = input_color.value;
+      bucket.color = input_color.value;
     });
   }
 input_color.addEventListener('click',ChangeColor)
-  

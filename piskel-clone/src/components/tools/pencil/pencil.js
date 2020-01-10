@@ -1,7 +1,6 @@
-import { canvas,ctx } from "../canvas";
+import { canvas,ctx } from "../../canvas.js";
 import {tools} from '../tools.js';
 import {size} from '../SizeTool/sizetools.js';
-const CANVAS_SIZE = 768;
 class Pencil{
     constructor(color){
         this.color = color;
@@ -10,7 +9,6 @@ class Pencil{
         this.draw = false;
     }
      MouseDown(e){
-         console.log('work');
         if (tools.id == 'pencil' || tools.id == 'eraser'){   
         this.mouse.x = e.pageX - canvas.offsetLeft;
         this.mouse.y = e.pageY - canvas.offsetTop;
@@ -78,5 +76,5 @@ class Pencil{
 }
 const pencilbtn = document.querySelector('.pencil');
 const pencil = new Pencil("#000",pencilbtn);
- 
+const CANVAS_SIZE = 768;
 export {pencil,Pencil};

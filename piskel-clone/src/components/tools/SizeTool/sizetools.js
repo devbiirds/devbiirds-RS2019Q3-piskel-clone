@@ -9,7 +9,6 @@ class Size{
         this.item_prev = active_small;
         this.items = document.querySelectorAll('.size_info');
         this.items.forEach((elem)=>{
-            
             elem.addEventListener('click',(event)=>{
                 if(event.currentTarget.id == 'small')  {
                     this.item_size = SMALL_SIZE;

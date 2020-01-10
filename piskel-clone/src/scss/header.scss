@@ -19,5 +19,21 @@
             font-size: 30px;
             animation: title 10s infinite;
         }
+        
+    }
+    &_exit{
+        width: 70px;
+        height: 40px;
+        img{
+          height: 25px;
+          width: 25px; 
+        }
+          cursor: pointer;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          &--text{
+              font-size: 16px;
+          } 
     }
 }
