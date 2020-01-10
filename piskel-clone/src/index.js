@@ -7,6 +7,8 @@ import {grid} from './components/piskel.js';
 import {stroke} from './components/tools/stroke/stroke.js';
 import {framebox} from './components/Frame/frame.js';
 import {bucket} from './components/tools/bucket/bucket.js';
+import {input_color, ChangeColor} from './components/tools/color/color.js';
+input_color.addEventListener('click',ChangeColor)
 grid.addEventListener('mousedown', (event)=>{
     switch (tools.id) {
         case "pencil":pencil.MouseDown(event);break;
@@ -38,14 +40,3 @@ grid.addEventListener('mouseup', (event)=>{
     }
     framebox.ChangingDataFrame(canvas_pallete.saveImage());
 });
-var input_color = document.getElementById("input_color");
-function ChangeColor() {
-    
-    input_color.click();
-    input_color.addEventListener("change", function() {
-      pencil.color = input_color.value;
-      stroke.color = input_color.value;
-      bucket.color = input_color.value;
-    });
-  }
-input_color.addEventListener('click',ChangeColor)

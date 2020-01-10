@@ -102,7 +102,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const frame = document.querySelector('.frame');
-const CANVAS_SIZE = 768;
 const icon_delete = '/src/assets/img/delete.svg';
 const icon_copy = '/src/assets/img/clone-regular.svg';
 class Frame {
@@ -502,6 +501,38 @@ const cleaning = new Clean();
 
 /***/ }),
 
+/***/ "./src/components/tools/color/color.js":
+/*!*********************************************!*\
+  !*** ./src/components/tools/color/color.js ***!
+  \*********************************************/
+/*! exports provided: input_color, ChangeColor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "input_color", function() { return input_color; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeColor", function() { return ChangeColor; });
+/* harmony import */ var _pencil_pencil_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pencil/pencil.js */ "./src/components/tools/pencil/pencil.js");
+/* harmony import */ var _stroke_stroke_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stroke/stroke.js */ "./src/components/tools/stroke/stroke.js");
+/* harmony import */ var _bucket_bucket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../bucket/bucket.js */ "./src/components/tools/bucket/bucket.js");
+
+
+
+const input_color = document.getElementById("input_color");
+
+function ChangeColor() {
+    
+    input_color.click();
+    input_color.addEventListener("change", function() {
+      _pencil_pencil_js__WEBPACK_IMPORTED_MODULE_0__["pencil"].color = input_color.value;
+      _stroke_stroke_js__WEBPACK_IMPORTED_MODULE_1__["stroke"].color = input_color.value;
+      _bucket_bucket_js__WEBPACK_IMPORTED_MODULE_2__["bucket"].color = input_color.value;
+    });
+  }
+
+
+/***/ }),
+
 /***/ "./src/components/tools/eraser/eraser.js":
 /*!***********************************************!*\
   !*** ./src/components/tools/eraser/eraser.js ***!
@@ -732,9 +763,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tools", function() { return tools; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tools", function() { return Tools; });
 /* harmony import */ var _clean_clean_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clean/clean.js */ "./src/components/tools/clean/clean.js");
+/* harmony import */ var _color_color_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color/color.js */ "./src/components/tools/color/color.js");
+/* harmony import */ var _Frame_frame_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Frame/frame.js */ "./src/components/Frame/frame.js");
+/* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas.js */ "./src/components/canvas.js");
+/* harmony import */ var _piskel_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../piskel.js */ "./src/components/piskel.js");
 
-var keydown = [];
-var flag = true;
+
+
+
+
 class Tools{
     constructor(_tools){
         this.prev_tool = null;
@@ -748,12 +785,57 @@ class Tools{
         })
         document.addEventListener('keydown', (e)=>this.logKey(e));
     }
-    logKey(e) {
-        if (event.code == 'KeyP' && event.shiftKey) {
-            this.Action(event);
-            this.ChangeTool("pencil",this.prev_tool);
+    logKey(event) {
+        
+        if (event.code == 'KeyZ' && event.ctrlKey) {
+            this.ActionKey("pencil",document.querySelector('.pencil'));
           }
+        if (event.code == 'KeyX' && event.ctrlKey) {
+            this.ActionKey("bucket",document.querySelector('.bucket'));
+          }
+          if (event.code == 'KeyC' && event.ctrlKey) {
+            this.ActionKey("eraser",document.querySelector('.eraser'));
+          }
+          if (event.code == 'KeyV' && event.ctrlKey) {
+            this.ActionKey("stroke",document.querySelector('.stroke'));
+          }
+          if (event.code == 'KeyB' && event.ctrlKey) {
+            _clean_clean_js__WEBPACK_IMPORTED_MODULE_0__["default"].Clean();
+            this.ActionKey("cleaning",document.querySelector('.cleaning'));
+          }
+          if (event.code == 'KeyE' && event.ctrlKey) {
+            Object(_color_color_js__WEBPACK_IMPORTED_MODULE_1__["ChangeColor"])();
+          }
+          if (event.code == 'KeyQ' && event.ctrlKey) {
+            _Frame_frame_js__WEBPACK_IMPORTED_MODULE_2__["framebox"].Add(_canvas_js__WEBPACK_IMPORTED_MODULE_3__["canvas_pallete"].saveImage())
+          }
+          if (event.code == 'KeyH' && event.shiftKey) {
+            _piskel_js__WEBPACK_IMPORTED_MODULE_4__["mypiskel"].GoLending();
+          }
+          if (event.code == 'Enter') {
+            _piskel_js__WEBPACK_IMPORTED_MODULE_4__["mypiskel"].StartPiskel();
+          }
+          if (event.code == 'KeyE' && event.shiftKey) {
+            let elem = document.querySelector('#small');
+            elem.click();
+          }
+          if (event.code == 'KeyR' && event.shiftKey) {
+            let elem = document.querySelector('#medium');
+            elem.click();
+          }
+          if (event.code == 'KeyT' && event.shiftKey) {
+            let elem = document.querySelector('#large');
+            elem.click();
+          }
+          
       }
+    ActionKey(id,currentTarget){
+    if(this.tool === null) this.prev_tool = currentTarget;
+    this.tool = currentTarget;
+    this.id = id;
+    this.ChangeTool(this.tool,this.prev_tool);//checked
+        this.prev_tool = currentTarget;
+    }
     Action(event){
         if(this.tool === null) this.prev_tool = event.currentTarget;
         this.tool = event.currentTarget;
@@ -763,6 +845,8 @@ class Tools{
         this.prev_tool = event.currentTarget;
     }
     ChangeTool(tool,prev_tool){
+        console.log(tool);
+        console.log(prev_tool)
         if(prev_tool !== null) prev_tool.classList.toggle('tools_icon--active',false);
         tool.classList.add('tools_icon--active');
     }
@@ -804,6 +888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tools_stroke_stroke_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/tools/stroke/stroke.js */ "./src/components/tools/stroke/stroke.js");
 /* harmony import */ var _components_Frame_frame_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Frame/frame.js */ "./src/components/Frame/frame.js");
 /* harmony import */ var _components_tools_bucket_bucket_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/tools/bucket/bucket.js */ "./src/components/tools/bucket/bucket.js");
+/* harmony import */ var _components_tools_color_color_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/tools/color/color.js */ "./src/components/tools/color/color.js");
 
 
 
@@ -813,6 +898,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+_components_tools_color_color_js__WEBPACK_IMPORTED_MODULE_9__["input_color"].addEventListener('click',_components_tools_color_color_js__WEBPACK_IMPORTED_MODULE_9__["ChangeColor"])
 _components_piskel_js__WEBPACK_IMPORTED_MODULE_5__["grid"].addEventListener('mousedown', (event)=>{
     switch (_components_tools_tools_js__WEBPACK_IMPORTED_MODULE_1__["tools"].id) {
         case "pencil":_components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].MouseDown(event);break;
@@ -844,17 +931,6 @@ _components_piskel_js__WEBPACK_IMPORTED_MODULE_5__["grid"].addEventListener('mou
     }
     _components_Frame_frame_js__WEBPACK_IMPORTED_MODULE_7__["framebox"].ChangingDataFrame(_components_canvas_js__WEBPACK_IMPORTED_MODULE_2__["canvas_pallete"].saveImage());
 });
-var input_color = document.getElementById("input_color");
-function ChangeColor() {
-    
-    input_color.click();
-    input_color.addEventListener("change", function() {
-      _components_tools_pencil_pencil__WEBPACK_IMPORTED_MODULE_3__["pencil"].color = input_color.value;
-      _components_tools_stroke_stroke_js__WEBPACK_IMPORTED_MODULE_6__["stroke"].color = input_color.value;
-      _components_tools_bucket_bucket_js__WEBPACK_IMPORTED_MODULE_8__["bucket"].color = input_color.value;
-    });
-  }
-input_color.addEventListener('click',ChangeColor)
 
 /***/ }),
 

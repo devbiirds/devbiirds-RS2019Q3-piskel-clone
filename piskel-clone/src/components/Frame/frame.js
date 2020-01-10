@@ -1,7 +1,6 @@
 import {canvas_pallete,ctx} from '../canvas.js';
-import {animation, Show} from '../Show/show.js';
+import {animation} from '../Show/show.js';
 const frame = document.querySelector('.frame');
-const CANVAS_SIZE = 768;
 const icon_delete = '/src/assets/img/delete.svg';
 const icon_copy = '/src/assets/img/clone-regular.svg';
 class Frame {
