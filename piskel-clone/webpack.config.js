@@ -1,9 +1,10 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   devtool: 'source-map',
-  entry:['./src/index.js','./src/index.html'],
+  entry: ['./src/index.js', './src/index.html'],
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -42,13 +43,13 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline-loader'
-    }
+        loader: 'svg-inline-loader',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: './src/index.html',
     }),
     new ExtractTextPlugin('style.css'),
   ],

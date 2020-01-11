@@ -1,35 +1,42 @@
-import {framebox} from '../Frame/frame.js';
-const fps_range = document.querySelector('.fps');
-const fps_image = document.querySelector('.canvas__tools--show-canvas');
-let image = document.createElement('img');
-image.classList.add('fps-image')
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-undef */
+/* eslint-disable import/no-cycle */
+import { framebox } from '../Frame/frame';
+
+const FPS_RANGE = document.querySelector('.fps');
+const FPS_IMAGE = document.querySelector('.canvas__tools--show-canvas');
+const data = document.createElement('img');
+const SECOND = 1000;
+data.classList.add('fps-image');
 class Show {
-    constructor(fps_range){
-        this.interval = null;
-        this.range = fps_range;
-        this.fps = 0;
-        this.range.addEventListener('change',(event)=>{
-            this.fps = this.range.value
-            animation.FPS_SHOW(framebox.counter - 1);
-        })
-    }
-    NextFrame(image, counter){
-        if(counter !== undefined)
-        image.src = framebox.listFrame[counter].src;
-    }
-    FPS_SHOW(counter){
-        clearInterval(this.interval);
-        counter = framebox.listFrame.length ;
-        fps_image.appendChild(image);
-        let i = 0;
-        this.interval = setInterval(()=> {
-        if(counter == 0) i = 0;
-        if(i >= counter  ) i = 0;
-        else { this.NextFrame(image, i);i++;} 
-    }, 1000/this.fps); 
-        
-    }
+  constructor(fps) {
+    this.interval = null;
+    this.range = fps;
+    this.fps = 0;
+    this.range.addEventListener('change', () => {
+      this.fps = this.range.value;
+      this.FPS_SHOW(framebox.counter - 1);
+    });
+  }
+
+  NextFrame(data, counter) {
+    if (counter !== undefined) { data.src = framebox.listFrame[counter].src; }
+  }
+
+  FPS_SHOW(counter) {
+    clearInterval(this.interval);
+    counter = framebox.listFrame.length;
+    FPS_IMAGE.appendChild(data);
+    let i = 0;
+    this.interval = setInterval(() => {
+      if (counter === 0) i = 0;
+      if (i >= counter) i = 0;
+      else { this.NextFrame(data, i); i += 1; }
+    }, SECOND / this.fps);
+  }
 }
 
-const animation = new Show(fps_range);
-export {animation, Show};
+const animation = new Show(FPS_RANGE);
+export { animation, Show };
