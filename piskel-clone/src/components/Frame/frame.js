@@ -6,8 +6,8 @@ import { canvaspallete, ctx } from '../canvas';
 import { animation } from '../Show/show';
 
 const frame = document.querySelector('.frame');
-const ICON_DELETE = '/src/assets/img/delete.svg';
-const ICON_COPY = '/src/assets/img/clone-regular.svg';
+const ICON_DELETE = './assets/img/delete.svg';
+const ICON_COPY = './assets/img/clone-regular.svg';
 class Frame {
   constructor() {
     this.counter = 0;
